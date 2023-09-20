@@ -28,7 +28,12 @@ export default class WebSessionConcept {
     // Hint: Take a look at how the "end" function makes sure the user is logged in. Keep in mind that a
     // synchronization like starting a session should just consist of a series of actions that may throw
     // exceptions and should not have its own control flow.
-    session.user = username;
+    
+    if (session.user) {
+      throw new Error(`User ${session.user} is still logged in!`);
+    } else {
+      session.user = username;
+    }
   }
 
   getUser(session: WebSessionDoc) {
